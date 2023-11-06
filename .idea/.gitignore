@@ -1,0 +1,38 @@
+# 忽略 Maven 生成的 target 目录
+/target/
+
+# 忽略 Gradle 生成的 build 目录
+/build/
+
+# 忽略 IntelliJ IDEA 生成的 .idea 目录
+.idea/
+
+# 忽略 Visual Studio Code 生成的 .vscode 目录
+.vscode/
+
+# 忽略日志文件
+*.log
+
+# 忽略临时文件
+*.tmp
+
+# 忽略日志目录
+/logs/
+
+# 忽略敏感配置文件
+application.properties
+application.yml
+
+# 忽略 Maven Wrapper 相关文件
+.mvn/
+
+# 忽略 Maven 构建日志
+/target/mvn.log
+
+# 忽略本地开发配置文件
+application-local.properties
+
+# 忽略 IDE 配置文件
+.editorconfig
+.gitignore
+.gitattributes
