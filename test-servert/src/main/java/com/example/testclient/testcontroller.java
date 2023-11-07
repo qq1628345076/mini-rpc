@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class testcontroller {
     @InjectService
     private static TestService testService;
-    @RequestMapping("/test")
+    @RequestMapping("/asd")
     public void setTestService(){
-        testService.test("a");
+        String a = testService.test("a");
+        System.out.println(a);
     }
 }

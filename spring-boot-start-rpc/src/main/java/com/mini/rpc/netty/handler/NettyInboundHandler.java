@@ -3,13 +3,11 @@ package com.mini.rpc.netty.handler;
 
 import com.mini.rpc.model.RpcRequest;
 import com.mini.rpc.model.RpcResponse;
-import com.mini.rpc.model.Service;
 import com.mini.rpc.netty.RpcFuture;
 import com.mini.rpc.protocol.MessageProtocol;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.ReferenceCountUtil;
@@ -68,8 +66,8 @@ public class NettyInboundHandler extends ChannelInboundHandlerAdapter {
             RpcFuture<RpcResponse> objectRpcFuture = new RpcFuture<>();
             requestMap.put(requestId, objectRpcFuture);
             byte[] bytes = messageProtocol.marshallingRequest(rpcRequest);
-            ByteBuf reqBuf = Unpooled.buffer(bytes.length);
-            channel.writeAndFlush((Object) reqBuf);
+            ByteBuf reqBuf = Unpooled.wrappedBuffer(bytes);
+            channel.writeAndFlush(reqBuf).sync();
             // 等待返回值
             RpcResponse rpcResponse = objectRpcFuture.get(5, TimeUnit.SECONDS);
             return rpcResponse;

@@ -94,8 +94,8 @@ public class NacosServerDiscovery implements ServerDiscovery {
     private Service convertToService(Instance instance) {
         Service service = new Service();
         service.setWeight((int) instance.getWeight());
-        //@@cn.sp.UserService 转成 cn.sp.UserService
-        service.setName(instance.getServiceName().replace("@@", ""));
+        //DEFAULT_GROUP@@cn.sp.UserService 转成 cn.sp.UserService  默认DEFAULT_GROUP分组
+        service.setName(instance.getServiceName().replace("DEFAULT_GROUP@@", ""));
         Map<String, String> metadata = instance.getMetadata();
         service.setProtocol(metadata.get("protocol"));
         service.setIp(instance.getIp());

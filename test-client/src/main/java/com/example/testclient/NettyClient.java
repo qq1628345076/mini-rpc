@@ -1,6 +1,8 @@
 package com.example.testclient;
 
 import io.netty.bootstrap.Bootstrap;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -8,6 +10,8 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+
+import java.util.Scanner;
 
 public class NettyClient {
     public static void main(String[] args) throws InterruptedException {
@@ -25,7 +29,7 @@ public class NettyClient {
                         }
                     });
 
-            String serverHost = "192.168.31.84";
+            String serverHost = "192.168.2.97";
             int serverPort = 6531;
 
             ChannelFuture channelFuture = bootstrap.connect(serverHost, serverPort);
@@ -36,8 +40,16 @@ public class NettyClient {
                     System.out.println("Connected to server successfully");
                     Channel channel = future.channel();
 
-                    // 在这里可以发送和接收消息
-                    channel.writeAndFlush("Hello, Server!");
+                    while (true){
+                        Scanner scanner = new Scanner(System.in);
+                        byte[] bytes = scanner.nextLine().getBytes();
+                        ByteBuf byteBuf = Unpooled.wrappedBuffer(bytes);
+                        channel.writeAndFlush(byteBuf).sync();
+                        System.out.println(channel.isActive());
+                    }
+
+
+
                 } else {
                     System.err.println("Failed to connect to server");
                 }

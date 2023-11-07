@@ -8,6 +8,8 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.DelimiterBasedFrameDecoder;
+import io.netty.handler.codec.FixedLengthFrameDecoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.util.ReferenceCountUtil;
@@ -44,7 +46,7 @@ public class NettyRpcServer extends RpcServer {
     @Override
     public void start() {
         // 配置服务器
-        NioEventLoopGroup bossGroup = new NioEventLoopGroup(1);
+        NioEventLoopGroup bossGroup = new NioEventLoopGroup(2);
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
             ServerBootstrap b = new ServerBootstrap();
@@ -57,7 +59,9 @@ public class NettyRpcServer extends RpcServer {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
                             System.out.println("初始化了int");
+
                             ChannelPipeline pipeline = ch.pipeline();
+
                             pipeline.addLast(new ChannelRequestHandler());
 
                         }
