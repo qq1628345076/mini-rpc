@@ -2,6 +2,7 @@ package com.mini.rpc.protocol.imp;
 
 
 
+import com.mini.rpc.annotation.MessageProtocolAnnotation;
 import com.mini.rpc.model.RpcRequest;
 import com.mini.rpc.model.RpcResponse;
 import com.mini.rpc.protocol.MessageProtocol;
@@ -14,6 +15,7 @@ import java.io.*;
  * @author 2YSP
  * @date 2020/7/25 21:07
  */
+@MessageProtocolAnnotation("java")
 public class JavaSerializeMessageProtocol implements MessageProtocol {
 
     private byte[] serialize(Object o) throws IOException {

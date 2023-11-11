@@ -7,6 +7,7 @@ import com.mini.rpc.model.RpcResponse;
 /**
  *消息协议:定义编组请求、解组请求、编组响应、解组响应的规范
  * todo 各类实现
+ * zy
  */
 public interface MessageProtocol {
     /**

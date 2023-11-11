@@ -1,0 +1,2 @@
+com.mini.rpc.protocol.imp.FurySerializeMessageProtocol
+com.mini.rpc.protocol.imp.JavaSerializeMessageProtocol

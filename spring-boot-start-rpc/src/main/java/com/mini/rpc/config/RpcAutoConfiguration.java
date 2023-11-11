@@ -6,6 +6,7 @@ import com.mini.rpc.discovery.ServerDiscovery;
 import com.mini.rpc.discovery.imp.NacosServerDiscovery;
 import com.mini.rpc.discovery.regist.ServerRegister;
 import com.mini.rpc.exception.RpcException;
+import com.mini.rpc.manager.MessageProtocolManager;
 import com.mini.rpc.netty.NetClient;
 import com.mini.rpc.processor.SpringRpcProcessor;
 import com.mini.rpc.protocol.MessageProtocol;
@@ -44,8 +45,9 @@ public class RpcAutoConfiguration {
 
     @Bean
     public MessageProtocol messageProtocol(){
+        MessageProtocol messageProtocol = MessageProtocolManager.getMessageProtocol(rpcConfig.getProtocol());
         //todo  实现多种消息协议
-        return new JavaSerializeMessageProtocol();
+        return messageProtocol;
     }
 
     @Bean
