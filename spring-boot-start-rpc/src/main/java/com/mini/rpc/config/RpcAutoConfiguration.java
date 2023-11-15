@@ -1,7 +1,9 @@
 package com.mini.rpc.config;
 
 import com.alibaba.nacos.api.naming.NamingService;
+import com.mini.rpc.annotation.EnableMiniRpc;
 import com.mini.rpc.config.properties.MiniRpcConfig;
+import com.mini.rpc.config.selector.EnableStart;
 import com.mini.rpc.discovery.ServerDiscovery;
 import com.mini.rpc.discovery.imp.NacosServerDiscovery;
 import com.mini.rpc.discovery.regist.ServerRegister;
@@ -16,9 +18,11 @@ import com.mini.rpc.server.NettyRpcServer;
 import com.mini.rpc.server.RequestHandler;
 import com.mini.rpc.server.RpcServer;
 import jakarta.annotation.Resource;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 /**
  * spring boot rpc自动配置
@@ -27,7 +31,9 @@ import org.springframework.context.annotation.Configuration;
  * @date 2023/10/31
  */
 @Configuration
+@ConditionalOnBean(annotation = EnableMiniRpc.class)
 @EnableConfigurationProperties(MiniRpcConfig.class)
+@Import(EnableStart.class)
 public class RpcAutoConfiguration {
 
     @Resource

@@ -15,7 +15,7 @@ import java.io.*;
  * @author 2YSP
  * @date 2020/7/25 21:07
  */
-@MessageProtocolAnnotation("java")
+@MessageProtocolAnnotation("default")
 public class JavaSerializeMessageProtocol implements MessageProtocol {
 
     private byte[] serialize(Object o) throws IOException {
